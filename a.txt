@@ -1,0 +1,37 @@
+fl-clang-fast -c -o aql-parser.o aql-parser.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o lvm.o lvm.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o aql-adt.o aql-adt.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o test_aql.o test_aql.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o aql-lexer.o aql-lexer.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -o test_aql.exe aql-parser.o lvm.o aql-adt.o test_aql.o aql-lexer.o
+AFL_USE_ASAN=1 afl-gcc -c -o aql-parser.o_asan aql-parser.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o lvm.o_asan lvm.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o aql-adt.o_asan aql-adt.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o test_aql.o_asan test_aql.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o aql-lexer.o_asan aql-lexer.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -o test_aql_asan.exe aql-parser.o_asan lvm.o_asan aql-adt.o_asan test_aql.o_asan aql-lexer.o_asan
+AFL_USE_MSAN=1 afl-clang -fsanitize-memory-track-origins -fPIE -fno-omit-frame-pointer -g -c -o aql-parser.o_msan aql-parser.c -Wall -Wno-unused-variable
+AFL_USE_MSAN=1 afl-clang -fsanitize-memory-track-origins -fPIE -fno-omit-frame-pointer -g -c -o lvm.o_msan lvm.c -Wall -Wno-unused-variable
+AFL_USE_MSAN=1 afl-clang -fsanitize-memory-track-origins -fPIE -fno-omit-frame-pointer -g -c -o aql-adt.o_msan aql-adt.c -Wall -Wno-unused-variable
+AFL_USE_MSAN=1 afl-clang -fsanitize-memory-track-origins -fPIE -fno-omit-frame-pointer -g -c -o test_aql.o_msan test_aql.c -Wall -Wno-unused-variable
+AFL_USE_MSAN=1 afl-clang -fsanitize-memory-track-origins -fPIE -fno-omit-frame-pointer -g -c -o aql-lexer.o_msan aql-lexer.c -Wall -Wno-unused-variable
+AFL_USE_MSAN=1 afl-clang -fsanitize-memory-track-origins -fPIE -pie -fno-omit-frame-pointer -g -o test_aql_msan.exe aql-parser.o_msan lvm.o_msan aql-adt.o_msan test_aql.o_msan aql-lexer.o_msan
+afl-gcc -c -o aql-parser.o_cov aql-parser.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-gcc -c -o lvm.o_cov lvm.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-gcc -c -o aql-adt.o_cov aql-adt.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-gcc -c -o test_aql.o_cov test_aql.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-gcc -c -o aql-lexer.o_cov aql-lexer.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-gcc -o test_aql_cov.exe aql-parser.o_cov lvm.o_cov aql-adt.o_cov test_aql.o_cov aql-lexer.o_cov  -fprofile-arcs
+LAF_SPLIT_SWITCHES=1 LAF_TRANSFORM_COMPARES=1 LAF_SPLIT_COMPARES=1 /home/root/fuzz/install/afl-llvm-passes/afl-clang-fast -c -o aql-parser.o_laf aql-parser.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+LAF_SPLIT_SWITCHES=1 LAF_TRANSFORM_COMPARES=1 LAF_SPLIT_COMPARES=1 /home/root/fuzz/install/afl-llvm-passes/afl-clang-fast -c -o lvm.o_laf lvm.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+LAF_SPLIT_SWITCHES=1 LAF_TRANSFORM_COMPARES=1 LAF_SPLIT_COMPARES=1 /home/root/fuzz/install/afl-llvm-passes/afl-clang-fast -c -o aql-adt.o_laf aql-adt.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+LAF_SPLIT_SWITCHES=1 LAF_TRANSFORM_COMPARES=1 LAF_SPLIT_COMPARES=1 /home/root/fuzz/install/afl-llvm-passes/afl-clang-fast -c -o test_aql.o_laf test_aql.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+LAF_SPLIT_SWITCHES=1 LAF_TRANSFORM_COMPARES=1 LAF_SPLIT_COMPARES=1 /home/root/fuzz/install/afl-llvm-passes/afl-clang-fast -c -o aql-lexer.o_laf aql-lexer.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+LAF_SPLIT_SWITCHES=1 LAF_TRANSFORM_COMPARES=1 LAF_SPLIT_COMPARES=1 /home/root/fuzz/install/afl-llvm-passes/afl-clang-fast -o test_aql_laf.exe aql-parser.o_laf lvm.o_laf aql-adt.o_laf test_aql.o_laf aql-lexer.o_laf
+gcc -c -o aql-parser.o_plain aql-parser.c -Wall -Wno-unused-variable  -DINPUT_STDIN
+gcc -c -o lvm.o_plain lvm.c -Wall -Wno-unused-variable  -DINPUT_STDIN
+gcc -c -o aql-adt.o_plain aql-adt.c -Wall -Wno-unused-variable  -DINPUT_STDIN
+gcc -c -o test_aql.o_plain test_aql.c -Wall -Wno-unused-variable  -DINPUT_STDIN
+gcc -c -o aql-lexer.o_plain aql-lexer.c -Wall -Wno-unused-variable  -DINPUT_STDIN
+gcc -o test_aql_plain.exe aql-parser.o_plain lvm.o_plain aql-adt.o_plain test_aql.o_plain aql-lexer.o_plain
+
