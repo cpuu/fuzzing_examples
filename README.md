@@ -22,5 +22,5 @@ afl-gcc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_
 
 # Run
 ```
-# afl-fuzz -i testcase_dir_000 -o findings_dir_000 ./test_aql_afl.exe
+# afl-fuzz  -i testcase_dir_000 -o findings_dir_000  ./test_aql_afl.exe @@
 ```
