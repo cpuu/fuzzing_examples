@@ -1,5 +1,13 @@
 # fuzzing_examples
 
+## Requirement
+```
+$ su - root
+# echo core >/proc/sys/kernel/core_pattern
+# cd /sys/devices/system/cpu
+# echo performance | tee cpu*/cpufreq/scaling_governor
+```
+
 ## plain
 ```
 gcc -c -o aql-parser.o_plain aql-parser.c -Wall -Wno-unused-variable  -DINPUT_STDIN 
@@ -11,6 +19,7 @@ gcc -o test_aql_plain.exe aql-parser.o_plain lvm.o_plain aql-adt.o_plain test_aq
 ```
 
 ## afl-gcc
+Build
 ```
 afl-gcc -c -o aql-parser.o_afl aql-parser.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
 afl-gcc -c -o lvm.o_afl lvm.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
@@ -21,7 +30,29 @@ afl-gcc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_
 ```
 Run
 ```
+# rm -rf ./findings_dir/
 # afl-fuzz  -i testcase_dir -o findings_dir  ./test_aql_afl.exe @@
+```
+Check
+```
+$ ./test_aql_afl.exe ./findings_dir/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:64
+-----------------------------
+T▒▒▒▒▒▒T▒▒▒▒▒d▒▒▒▒▒3▒▒3
+-------------------------
+size of input data = 34
+start parsing!!
+
+JB patched : aql-lexer.c:243 next_token() : stack buffer overflow (next_token) : lexer->value >= DB_MAX_ELEMENT_SIZE
+
+*** stack smashing detected ***: ./test_aql_afl.exe terminated
+Aborted
+
+```
+Clean
+```
+rm -rf ./findings_dir/
+rm ./*.o_afl* ./test_aql_afl.exe
+
 ```
 ## afl-gcc with Address Sanitizer
 ```
