@@ -19,8 +19,19 @@ afl-gcc -c -o test_aql.o_afl test_aql.c -Wall -Wno-unused-variable  -fprofile-ar
 afl-gcc -c -o aql-lexer.o_afl aql-lexer.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
 afl-gcc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_afl aql-lexer.o_afl  -fprofile-arcs
 ```
-
-# Run
+Run
 ```
 # afl-fuzz  -i testcase_dir -o findings_dir  ./test_aql_afl.exe @@
 ```
+## afl-gcc with Address Sanitizer
+```
+AFL_USE_ASAN=1 afl-gcc -c -o aql-parser.o_asan aql-parser.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o lvm.o_asan lvm.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o aql-adt.o_asan aql-adt.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o test_aql.o_asan test_aql.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -c -o aql-lexer.o_asan aql-lexer.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-gcc -o test_aql_asan.exe aql-parser.o_asan lvm.o_asan aql-adt.o_asan test_aql.o_asan aql-lexer.o_asan
+```
+
+# Run
+
