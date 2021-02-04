@@ -20,8 +20,6 @@ gcc -o test_aql_plain.exe aql-parser.o_plain lvm.o_plain aql-adt.o_plain test_aq
 ```
 Run
 ```
-rm -rf ./findings_dir/
-```
 dumb mode
 ```
 afl-fuzz -n -i testcase_dir -o findings_dir ./test_aql_plain.exe @@
@@ -29,6 +27,11 @@ afl-fuzz -n -i testcase_dir -o findings_dir ./test_aql_plain.exe @@
 qemu mode
 ```
 afl-fuzz -m none -Q -i testcase_dir -o findings_dir ./test_aql_plain.exe @@
+```
+Clean
+```
+rm -rf ./findings_dir/
+rm ./*.o_plain ./test_aql_plain.exe
 ```
 ## afl-gcc
 Build
@@ -42,7 +45,6 @@ afl-gcc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_
 ```
 Run
 ```
-rm -rf ./findings_dir/
 afl-fuzz -i testcase_dir -o findings_dir ./test_aql_afl.exe @@
 ```
 
