@@ -78,6 +78,16 @@ AFL_USE_ASAN=1 afl-gcc -c -o test_aql.o_asan test_aql.c -Wall -Wno-unused-variab
 AFL_USE_ASAN=1 afl-gcc -c -o aql-lexer.o_asan aql-lexer.c -Wall -Wno-unused-variable
 AFL_USE_ASAN=1 afl-gcc -o test_aql_asan.exe aql-parser.o_asan lvm.o_asan aql-adt.o_asan test_aql.o_asan aql-lexer.o_asan
 ```
+Run
 ```
-afl-fuzz -m none -i testcase_dir_000 -o findings_dir_000 ./test_aql_asan.exe @@
+afl-fuzz -m none -i testcase_dir -o findings_dir ./test_aql_asan.exe @@
+```
+Check
+```
+./test_aql_asan.exe ./findings_dir/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:4
+```
+Clean
+```
+rm -rf ./findings_dir/
+rm ./*.o_asan* ./test_aql_asan.exe
 ```
