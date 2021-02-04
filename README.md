@@ -30,7 +30,6 @@ afl-gcc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_
 ```
 Run
 ```
-# rm -rf ./findings_dir/
 # afl-fuzz  -i testcase_dir -o findings_dir  ./test_aql_afl.exe @@
 ```
 Check
@@ -51,7 +50,7 @@ Aborted
 Clean
 ```
 rm -rf ./findings_dir/
-rm ./*.o_afl* ./test_aql_afl.exe
+rm ./*.o_afl* *.gcda *.gcno ./test_aql_afl.exe
 
 ```
 ## afl-gcc with Address Sanitizer
