@@ -19,7 +19,6 @@ gcc -c -o aql-lexer.o_plain aql-lexer.c -Wall -Wno-unused-variable  -DINPUT_STDI
 gcc -o test_aql_plain.exe aql-parser.o_plain lvm.o_plain aql-adt.o_plain test_aql.o_plain aql-lexer.o_plain 
 ```
 Run
-```
 dumb mode
 ```
 afl-fuzz -n -i testcase_dir -o findings_dir ./test_aql_plain.exe @@
