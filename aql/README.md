@@ -91,3 +91,18 @@ Clean
 rm -rf ./findings_dir/
 rm ./*.o_asan* ./test_aql_asan.exe
 ```
+
+## afl-clang-fast with AFL_PERSISTENT_MODE
+Build
+```
+afl-clang-fast -c -o aql-parser.o_fast aql-parser.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o lvm.o_fast lvm.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o aql-adt.o_fast aql-adt.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o test_aql.o_fast test_aql.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -c -o aql-lexer.o_fast aql-lexer.c -Wall -Wno-unused-variable  -DAFL_PERSISTENT_MODE
+afl-clang-fast -o test_aql_fast.exe aql-parser.o_fast lvm.o_fast aql-adt.o_fast test_aql.o_fast aql-lexer.o_fast
+```
+Run
+```
+afl-fuzz -i testcase_dir -o findings_dir ./test_aql_fast.exe @@
+```
