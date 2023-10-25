@@ -69,12 +69,12 @@ rm ./*.o_afl* ./test_aql_afl.exe
 ## afl-gcc with Address Sanitizer
 Build
 ```
-AFL_USE_ASAN=1 afl-gcc -c -o aql-parser.o_asan aql-parser.c -Wall -Wno-unused-variable
-AFL_USE_ASAN=1 afl-gcc -c -o lvm.o_asan lvm.c -Wall -Wno-unused-variable
-AFL_USE_ASAN=1 afl-gcc -c -o aql-adt.o_asan aql-adt.c -Wall -Wno-unused-variable
-AFL_USE_ASAN=1 afl-gcc -c -o test_aql.o_asan test_aql.c -Wall -Wno-unused-variable
-AFL_USE_ASAN=1 afl-gcc -c -o aql-lexer.o_asan aql-lexer.c -Wall -Wno-unused-variable
-AFL_USE_ASAN=1 afl-gcc -o test_aql_asan.exe aql-parser.o_asan lvm.o_asan aql-adt.o_asan test_aql.o_asan aql-lexer.o_asan
+AFL_USE_ASAN=1 afl-cc -c -o aql-parser.o_asan aql-parser.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-cc -c -o lvm.o_asan lvm.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-cc -c -o aql-adt.o_asan aql-adt.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-cc -c -o test_aql.o_asan test_aql.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-cc -c -o aql-lexer.o_asan aql-lexer.c -Wall -Wno-unused-variable
+AFL_USE_ASAN=1 afl-cc -o test_aql_asan.exe aql-parser.o_asan lvm.o_asan aql-adt.o_asan test_aql.o_asan aql-lexer.o_asan
 ```
 Run
 ```
