@@ -82,7 +82,7 @@ afl-fuzz -m none -i testcase_dir -o findings_dir ./test_aql_asan.exe @@
 ```
 Check
 ```
-./test_aql_asan.exe ./findings_dir/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:4
+./test_aql_asan.exe ./findings_dir/default/crashes/id\:000000\,sig\:06\,src\:000000\,time\:137\,execs\:36\,op\:havoc\,rep\:4
 ```
 Clean
 ```
