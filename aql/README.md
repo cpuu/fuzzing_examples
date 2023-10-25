@@ -47,7 +47,7 @@ afl-fuzz -i testcase_dir -o findings_dir ./test_aql_afl.exe @@
 
 Check
 ```
-$ ./test_aql_afl.exe ./findings_dir/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:64
+$ ./test_aql_afl.exe ./findings_dir/default/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:64
 -----------------------------
 T▒▒▒▒▒▒T▒▒▒▒▒d▒▒▒▒▒3▒▒3
 -------------------------
