@@ -30,7 +30,7 @@ Clean
 rm -rf ./findings_dir/
 rm ./*.o_plain ./test_aql_plain.exe
 ```
-## afl-gcc
+## afl-cc
 Build
 ```
 afl-cc -c -o aql-parser.o_afl aql-parser.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
