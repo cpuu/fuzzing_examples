@@ -2,10 +2,8 @@
 
 ## Requirement
 ```
-$ su - root
-# echo core >/proc/sys/kernel/core_pattern
-# cd /sys/devices/system/cpu
-# echo performance | tee cpu*/cpufreq/scaling_governor
+$ docker pull aflplusplus/aflplusplus
+$ docker run -ti -v /home/cpuu/fuzzing_examples/:/AFLplusplus/fuzzing_examples aflplusplus/aflplusplus
 ```
 
 ## plain
@@ -35,12 +33,12 @@ rm ./*.o_plain ./test_aql_plain.exe
 ## afl-gcc
 Build
 ```
-afl-gcc -c -o aql-parser.o_afl aql-parser.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
-afl-gcc -c -o lvm.o_afl lvm.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
-afl-gcc -c -o aql-adt.o_afl aql-adt.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
-afl-gcc -c -o test_aql.o_afl test_aql.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
-afl-gcc -c -o aql-lexer.o_afl aql-lexer.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
-afl-gcc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_afl aql-lexer.o_afl  -fprofile-arcs
+afl-cc -c -o aql-parser.o_afl aql-parser.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-cc -c -o lvm.o_afl lvm.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-cc -c -o aql-adt.o_afl aql-adt.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-cc -c -o test_aql.o_afl test_aql.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-cc -c -o aql-lexer.o_afl aql-lexer.c -Wall -Wno-unused-variable  -fprofile-arcs -ftest-coverage
+afl-cc -o test_aql_afl.exe aql-parser.o_afl lvm.o_afl aql-adt.o_afl test_aql.o_afl aql-lexer.o_afl  -fprofile-arcs
 ```
 Run
 ```
