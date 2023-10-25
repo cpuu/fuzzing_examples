@@ -2,8 +2,7 @@
 
 ## Requirement
 ```
-$ su - root
-# echo core >/proc/sys/kernel/core_pattern
-# cd /sys/devices/system/cpu
-# echo performance | tee cpu*/cpufreq/scaling_governor
+$ git clone https://github.com/cpuu/fuzzing_examples.git
+$ docker pull aflplusplus/aflplusplus
+$ docker run -ti -v /home/cpuu/fuzzing_examples/:/AFLplusplus/fuzzing_examples aflplusplus/aflplusplus
 ```
